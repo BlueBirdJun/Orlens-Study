@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OCatle.inf.V1\OCatle.inf.V1.csproj" />
+    <ProjectReference Include="..\PS.Core.Nuget\PS.Core.Nuget.csproj" />
+  </ItemGroup>
+
+</Project>
