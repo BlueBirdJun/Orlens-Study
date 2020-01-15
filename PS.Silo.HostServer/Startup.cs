@@ -27,6 +27,7 @@ using Serilog;
 using PS.Infrasture.Identity;
 using PS.Infrasture.Services;
 using OCatle.inf.V1.Streaming;
+using Orleans.Runtime.Configuration;
 
 namespace PS.Silo.HostServer
 {
@@ -98,22 +99,22 @@ namespace PS.Silo.HostServer
         private async Task<ISiloHost> StartSilo()
         {  
             OrlensConfigurator ofi = new OrlensConfigurator(Configuration);
-
             var dash = ofi.GetDashBoard();
             //var lstdb = ofi.RegDatabaseContext();
             var builder = new SiloHostBuilder()
               .ConfigureClustering(
                   ofi.GetOrlConfig(),
                   ofi.GetEnvironmentString()
-              )
+              )              
               .Configure<ClusterOptions>(options =>
               {
                   options.ClusterId = "Siloserver";
                   options.ServiceId = "OcatleService";
               })
                 .UseLocalhostClustering()
-                .AddMemoryGrainStorage(StreamNames.PubSubStorageName)
-                //.AddMemoryGrainStorage(Constants.OrleansMemoryProvider)
+                .AddSimpleMessageStreamProvider("bbb")
+                //.AddMemoryGrainStorage(StreamNames.PubSubStorageName)
+                .AddMemoryGrainStorage(Constants.OrleansMemoryProvider)
                 .UseInMemoryReminderService()                
                 .ConfigureServices(services =>
                 {

@@ -60,8 +60,8 @@ namespace OCatle.Grains.Common.Sample
             //await stream.OnNextAsync(message);
             CreateComand.Request re = new CreateComand.Request() { name = message, memo = "zz" };
             await _mediator.Send(re); 
-            stream.
-            stream.OnNextBatchAsync()
+            //stream.
+            //stream.OnNextBatchAsync()
             //await Task.Delay(1000);
             //await stream.OnCompletedAsync();
         }

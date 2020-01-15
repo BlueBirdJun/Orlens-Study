@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace clienttest
 {
-    class Program
+    class Program3
     {
-        static async Task Main(string[] args)
+        public async Task ccc()
         {
             try
             {
