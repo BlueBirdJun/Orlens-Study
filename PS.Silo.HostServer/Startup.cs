@@ -28,6 +28,7 @@ using PS.Infrasture.Identity;
 using PS.Infrasture.Services;
 using OCatle.inf.V1.Streaming;
 using Orleans.Runtime.Configuration;
+using PS.Database;
 
 namespace PS.Silo.HostServer
 {
@@ -40,6 +41,7 @@ namespace PS.Silo.HostServer
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
+            
             Environment = environment;
         
         }
@@ -100,6 +102,7 @@ namespace PS.Silo.HostServer
         {  
             OrlensConfigurator ofi = new OrlensConfigurator(Configuration);
             var dash = ofi.GetDashBoard();
+            var lstdb = ofi.RegDatabaseContext();
             //var lstdb = ofi.RegDatabaseContext();
             var builder = new SiloHostBuilder()
               .ConfigureClustering(
@@ -112,17 +115,33 @@ namespace PS.Silo.HostServer
                   options.ServiceId = "OcatleService";
               })
                 .UseLocalhostClustering()
-                .AddSimpleMessageStreamProvider("bbb")
-                //.AddMemoryGrainStorage(StreamNames.PubSubStorageName)
+                //.AddSimpleMessageStreamProvider("bbb")
+                .AddMemoryGrainStorage(StreamNames.PubSubStorageName)
                 .AddMemoryGrainStorage(Constants.OrleansMemoryProvider)
                 .UseInMemoryReminderService()                
+                .AddMemoryGrainStorageAsDefault()
                 .ConfigureServices(services =>
                 {
                     services.AddApplication();
                     services.AddInfrastructure(Configuration, Environment);
                     services.AddScoped<ICurrentUserService, CurrentUserService>();
                     //services..AddFluentVa1lidation(fv => fv.RegisterValidatorsFromAssemblyContaining<IApplicationDbContext>());
-
+                    services.AddEntityFrameworkSqlServer().AddDbContext<db_itemcontext>(options =>
+                    {
+                        options.UseSqlServer(lstdb.Where(p => p.Dbkind == "db_item").Single().Connectstring);
+                    });
+                    services.AddEntityFrameworkSqlServer().AddDbContext<db_partnercontext>(options =>
+                    {
+                        options.UseSqlServer(lstdb.Where(p => p.Dbkind == "db_partner").Single().Connectstring);
+                    });
+                    services.AddEntityFrameworkSqlServer().AddDbContext<db_mechantcontext>(options =>
+                    {
+                        options.UseSqlServer(lstdb.Where(p => p.Dbkind == "db_merchant").Single().Connectstring);
+                    });
+                    services.AddEntityFrameworkSqlServer().AddDbContext<db_usercontext>(options =>
+                    {
+                        options.UseSqlServer(lstdb.Where(p => p.Dbkind == "db_user").Single().Connectstring);
+                    });
 
                 })
                 //.ConfigureApplicationParts(parts =>
@@ -149,9 +168,9 @@ namespace PS.Silo.HostServer
             
             using (var scope = host.Services.CreateScope())
             {
-                var services = scope.ServiceProvider;
-                var context = services.GetRequiredService<ApplicationDbContext>();
-                await context.Database.MigrateAsync();
+                //var services = scope.ServiceProvider;
+                //var context = services.GetRequiredService<ApplicationDbContext>();
+                //await context.Database.MigrateAsync();
             }
 
             await host.StartAsync();

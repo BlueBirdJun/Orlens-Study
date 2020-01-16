@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PS.Core.Nuget\PS.Core.Nuget.csproj" />
+    <ProjectReference Include="..\PS.Database\PS.Database.csproj" />
     <ProjectReference Include="..\PS.Domain\PS.Domain.csproj" />
   </ItemGroup>
 

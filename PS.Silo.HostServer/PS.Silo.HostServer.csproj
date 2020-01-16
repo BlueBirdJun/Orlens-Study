@@ -27,6 +27,7 @@
     <ProjectReference Include="..\PS.Applications\PS.Applications.csproj" />
     <ProjectReference Include="..\PS.Common\PS.Common.csproj" />
     <ProjectReference Include="..\PS.Core.Nuget\PS.Core.Nuget.csproj" />
+    <ProjectReference Include="..\PS.Database\PS.Database.csproj" />
     <ProjectReference Include="..\PS.Infrasture\PS.Infrasture.csproj" />
   </ItemGroup>
 

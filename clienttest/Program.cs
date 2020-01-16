@@ -6,12 +6,25 @@ using System.Threading.Tasks;
 
 namespace clienttest
 {
-    class Program1
+    class Program
     {
-        public  async Task ccc()
+        static async Task Main(string[] args)
         {
             //await Task.Delay(5000);
-            Console.WriteLine("시작");
+            Console.WriteLine("시작뭔가테스트");
+            Console.WriteLine("입력");
+            var cc = Console.ReadLine();
+            if (cc == "EXIT")
+                return;
+            var client = new ClientBuilder()
+            .ConfigureApplicationParts(parts => parts.AddFromApplicationBaseDirectory())
+            .UseLocalhostClustering()
+            .Build();
+
+            await client.Connect();
+            var grain = client.GetGrain<IVersionProvider>(1);// Guid.NewGuid());
+
+            await grain.UpdateVersion("안녕");
 
 
             return;
@@ -20,21 +33,11 @@ namespace clienttest
             {
                 try
                 {
-                    Console.WriteLine("입력");
-                    var cc = Console.ReadLine();
-                    if (cc == "EXIT")
-                        return;
-                    var client = new ClientBuilder()
-                    .ConfigureApplicationParts(parts => parts.AddFromApplicationBaseDirectory())
-                    .UseLocalhostClustering()
-                    .Build();
-
-                    await client.Connect();
-                    var grain = client.GetGrain<IVersionProvider>(1);// Guid.NewGuid());
-                    for (int i = 0; i < 100; i++)
-                    {
-                        await grain.UpdateVersion(cc+i.ToString());
-                    }
+                  
+                    //for (int i = 0; i < 100; i++)
+                    //{
+                    //    await grain.UpdateVersion(cc+i.ToString());
+                    //}
                 }
                 catch(Exception exc)
                 {

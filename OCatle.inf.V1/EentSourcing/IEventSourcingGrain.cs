@@ -9,8 +9,8 @@ namespace OCatle.inf.V1.EentSourcing
 {
     public interface IEventSourcingGrain : IGrainWithIntegerKey, IGrainInterfaceMarker
     {
-        Task Deposit(decimal amount);
-        Task Withdraw(decimal amount);
+        Task Deposit(string name, decimal amount);
+        Task Withdraw(string name, decimal amount);
         Task<decimal> Balance();
 
 

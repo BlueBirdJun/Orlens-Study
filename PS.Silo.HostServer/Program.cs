@@ -21,11 +21,16 @@ namespace PS.Silo.HostServer
             
             var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
             string appjson = "appsettings.json";
+            string conjson = "values.json";
             if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT").ToLower() == "development")
+            {
                 appjson = $"appsettings.{environmentName}.json";
+                conjson = $"values.{environmentName}.json";
+            }  
 
             var configuration = new ConfigurationBuilder()
                     .AddJsonFile(appjson)
+                    .AddJsonFile(conjson)
                     .Build();
             Serilog.ILogger logger = Log.Logger = new LoggerConfiguration().
                 ReadFrom.Configuration(configuration).

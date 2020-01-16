@@ -9,7 +9,7 @@ namespace OCatle.inf.V1.Versions
 {
     public interface IVersionProvider : IGrainWithIntegerKey, IGrainInterfaceMarker
     {
-        
+        Task Gett1();
         Task UpdateVersion(string source);
     }
 }

@@ -41,52 +41,61 @@ namespace OCatle.Grains.Common.EventSourcing
             this._logger = logger;
             this._app = app;
             this._mediator = mediator;
+            
+            //var settings = ConnectionSettings
+            //    .Create().
+            //    EnableVerboseLogging()
+            //    .UseConsoleLogger();
 
-            var settings = ConnectionSettings
-                .Create().
-                EnableVerboseLogging()
-                .UseConsoleLogger();
-
-            _conn = EventStoreConnection.Create(settings, new IPEndPoint(IPAddress.Loopback, 8012));
-
+            //_conn = EventStoreConnection.Create(settings, new IPEndPoint(IPAddress.Loopback, 8012));
+            
             //this._mec = mec;
         }
-        /*public override async Task OnActivateAsync()
+        public override async Task OnActivateAsync()
         {
-            _stream = $"{GetType().Name}-{this.GetPrimaryKey()}";
+            //_stream = $"{GetType().Name}-{this.GetPrimaryKey()}";
 
-            await _conn.ConnectAsync();
+            //await _conn.ConnectAsync();
 
-            StreamEventsSlice currentSlice;
-            var nextSliceStart = StreamPosition.Start;
-            do
-            {
-                currentSlice = await _conn.ReadStreamEventsForwardAsync(_stream, nextSliceStart, 200, false);
-                foreach (var evnt in currentSlice.Events)
-                {
-                    base.RaiseEvent(DeserializeEvent(evnt.Event));
-                }
+            //StreamEventsSlice currentSlice;
+            //var nextSliceStart = StreamPosition.Start;
+            //do
+            //{
+            //    currentSlice = await _conn.ReadStreamEventsForwardAsync(_stream, nextSliceStart, 200, false);
+            //    foreach (var evnt in currentSlice.Events)
+            //    {
+            //        base.RaiseEvent(DeserializeEvent(evnt.Event));
+            //    }
 
-                nextSliceStart = (int)currentSlice.NextEventNumber;
+            //    nextSliceStart = (int)currentSlice.NextEventNumber;
 
-            } while (!currentSlice.IsEndOfStream);
+            //} while (!currentSlice.IsEndOfStream);
 
-            await ConfirmEvents();
-        }*/
+            //await ConfirmEvents();
+        }
 
+        public override Task OnDeactivateAsync()
+        {
+            _conn.Close();
+            _conn.Dispose();
+            return Task.CompletedTask;
+        }
+
+
+        private string callname = string.Empty;
 
         public Task<decimal> Balance()
         {
             return Task.FromResult(State.Balance);
         }
 
-        public Task Deposit(decimal amount)
+        public async Task Deposit(string name, decimal amount)
         {
-            RaiseEvent(new Deposited
+            callname = name;
+            await RaiseEvent(new Deposited
             {
                 Amount = amount
             });
-            return ConfirmEvents();
         }
 
         private async Task RaiseEvent(BankAccountEvent evnt)
@@ -94,19 +103,21 @@ namespace OCatle.Grains.Common.EventSourcing
             base.RaiseEvent(evnt);
             await ConfirmEvents();
 
-            await _conn.AppendToStreamAsync(_stream, Version - 2, ToEventData(Guid.NewGuid(), evnt, new Dictionary<string, object>()));
+            //await _conn.AppendToStreamAsync(_stream, Version - 2, ToEventData(Guid.NewGuid(), evnt, new Dictionary<string, object>()));
         }
 
 
 
-        public Task Withdraw(decimal amount)
+        public async Task Withdraw(string name, decimal amount)
         {
-            RaiseEvent(new Withdrawn
+            callname = name;
+            await RaiseEvent(new Withdrawn
             {
                 Amount = amount
             });
-            return ConfirmEvents();
+
         }
+
 
         public async Task<string> GetTest(string message)
         {

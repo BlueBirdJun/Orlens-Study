@@ -6,6 +6,7 @@ using Orleans.Concurrency;
 using PS.Applications.Common.Interfaces;
 using PS.Applications.TestCommand.Commands;
 using PS.Common.OrlensHelper;
+using PS.Database;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -19,22 +20,25 @@ namespace OCatle.Grains.Common.Verisons
     [StatelessWorker]
     public class VersionProvider : GrainBase, IVersionProvider
     {
-        private readonly IApplicationDbContext _app;
+        //private readonly IApplicationDbContext _app;
         private readonly IClusterClient _clusterClient;
         private readonly ILogger<VersionProvider> _logger;
         private IMediator _mediator;
+        private readonly db_mechantcontext _mec;
         public VersionProvider(IClusterClient clusterClient,
            //db_mechantcontext mec,
-           IApplicationDbContext app,
+          // IApplicationDbContext app,
            ILogger<VersionProvider> logger,
-           IMediator mediator
+           IMediator mediator,
+           db_mechantcontext mec
            )
         {
             this._clusterClient = clusterClient;
             this._logger = logger;
-            this._app = app;
+            //this._app = app;
             this._mediator = mediator;
-            //this._mec = mec;
+            this._mec = mec;
+
         }
         public async Task Gett1()
         {
@@ -44,8 +48,14 @@ namespace OCatle.Grains.Common.Verisons
         }
         public async Task UpdateVersion(string source)
         {
+            //_mec.Tblbrand.Add(new PS.Database.Models.db_Mechant.Tblbrand() { Brandname="안녕"  });
+            //await _mec.SaveChangesAsync();
+            PS.Applications.Brand.Commands.CreateCommand.Request data = new PS.Applications.Brand.Commands.CreateCommand.Request();
+            await _mediator.Send(data);
+
+            return;
             CreateComand.Request re = new CreateComand.Request() { name = source, memo = "zz" };
-            await _mediator.Send(re);
+            
 
             //Log.login("나오니?");
             //_logger.LogWarning("경고");
