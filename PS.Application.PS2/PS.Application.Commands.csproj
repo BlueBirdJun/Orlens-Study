@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Common\**" />
+    <EmbeddedResource Remove="Common\**" />
+    <None Remove="Common\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PS.Applications\PS.Applications.csproj" />
+    <ProjectReference Include="..\PS.Common\PS.Common.csproj" />
+    <ProjectReference Include="..\PS.Core.Nuget\PS.Core.Nuget.csproj" />
+    <ProjectReference Include="..\PS.Database\PS.Database.csproj" />
+    <ProjectReference Include="..\PS.Domain\PS.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Category\" />
+    <Folder Include="User\" />
+    <Folder Include="Version\" />
+  </ItemGroup>
+</Project>

@@ -29,6 +29,7 @@ using PS.Infrasture.Services;
 using OCatle.inf.V1.Streaming;
 using Orleans.Runtime.Configuration;
 using PS.Database;
+using PS.Application.Commands;
 
 namespace PS.Silo.HostServer
 {
@@ -123,6 +124,8 @@ namespace PS.Silo.HostServer
                 .ConfigureServices(services =>
                 {
                     services.AddApplication();
+                    services.AddApplicationCommand();
+
                     services.AddInfrastructure(Configuration, Environment);
                     services.AddScoped<ICurrentUserService, CurrentUserService>();
                     //services..AddFluentVa1lidation(fv => fv.RegisterValidatorsFromAssemblyContaining<IApplicationDbContext>());

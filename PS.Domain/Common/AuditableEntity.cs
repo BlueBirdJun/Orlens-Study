@@ -14,4 +14,5 @@ namespace PS.Domain.Common
 
         public DateTime? LastModified { get; set; }
     }
+
 }

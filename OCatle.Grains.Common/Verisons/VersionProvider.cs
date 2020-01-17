@@ -51,8 +51,9 @@ namespace OCatle.Grains.Common.Verisons
             //_mec.Tblbrand.Add(new PS.Database.Models.db_Mechant.Tblbrand() { Brandname="안녕"  });
             //await _mec.SaveChangesAsync();
             //PS.Applications.Brand.Commands.CreateCommand.Request data = new PS.Applications.Brand.Commands.CreateCommand.Request();
-            PS.Applications.Version.Commands.GetCommand.SeedData data = new PS.Applications.Version.Commands.BaseHandler<PS.Applications.Version.Commands.GetCommand.Request, PS.Applications.Version.Commands.GetCommand.Response>.SeedData();
-            data.Data =new PS.Applications.Version.Commands.GetCommand.Request() { cccc = "ddkdd" };
+
+            PS.Application.Commands.Brand.Commands.GetBrands.SeedData data = new PS.Applications.Common.Base.HandlerBase<PS.Application.Commands.Brand.Commands.GetBrands.Request, PS.Application.Commands.Brand.Commands.GetBrands.Response>.SeedData();
+            data.Data.dddd = "ccc";
 
             var rt =  await _mediator.Send(data);
 

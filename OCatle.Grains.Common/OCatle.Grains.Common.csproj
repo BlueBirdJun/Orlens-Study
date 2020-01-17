@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OCatle.inf.V1\OCatle.inf.V1.csproj" />
+    <ProjectReference Include="..\PS.Application.PS2\PS.Application.Commands.csproj" />
     <ProjectReference Include="..\PS.Common\PS.Common.csproj" />
     <ProjectReference Include="..\PS.Core.Nuget\PS.Core.Nuget.csproj" />
     <ProjectReference Include="..\PS.Database\PS.Database.csproj" />
