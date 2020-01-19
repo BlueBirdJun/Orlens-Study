@@ -24,13 +24,15 @@ namespace OCatle.Grains.Common.Verisons
         private readonly IClusterClient _clusterClient;
         private readonly ILogger<VersionProvider> _logger;
         private IMediator _mediator;
-        private readonly db_mechantcontext _mec;
+        //private readonly db_mechantcontext _mec;
+        private readonly IMechantDbContext _mec;
+
         public VersionProvider(IClusterClient clusterClient,
            //db_mechantcontext mec,
           // IApplicationDbContext app,
            ILogger<VersionProvider> logger,
-           IMediator mediator,
-           db_mechantcontext mec
+           IMediator mediator
+           ,IMechantDbContext mec
            )
         {
             this._clusterClient = clusterClient;
@@ -48,14 +50,20 @@ namespace OCatle.Grains.Common.Verisons
         }
         public async Task UpdateVersion(string source)
         {
+            //_mec.brand.Add(new PS.Database.Models.db_Mechant.Tblbrand() { Brandname = "ccccc" });
+            
+            // _mec.SaveChangesAsync();
+
+                
+            //await _mec.SaveChangesAsync(new CancellationToken() { });
             //_mec.Tblbrand.Add(new PS.Database.Models.db_Mechant.Tblbrand() { Brandname="안녕"  });
             //await _mec.SaveChangesAsync();
             //PS.Applications.Brand.Commands.CreateCommand.Request data = new PS.Applications.Brand.Commands.CreateCommand.Request();
 
-            PS.Application.Commands.Brand.Commands.GetBrands.SeedData data = new PS.Applications.Common.Base.HandlerBase<PS.Application.Commands.Brand.Commands.GetBrands.Request, PS.Application.Commands.Brand.Commands.GetBrands.Response>.SeedData();
-            data.Data.dddd = "ccc";
+            //PS.Application.Commands.Brand.Commands.GetBrands.SeedData data = new PS.Applications.Common.Base.HandlerBase<PS.Application.Commands.Brand.Commands.GetBrands.Request, PS.Application.Commands.Brand.Commands.GetBrands.Response>.SeedData();
+            //data.Data.dddd = "ccc";
 
-            var rt =  await _mediator.Send(data);
+            //var rt =  await _mediator.Send(data);
 
 
             return;

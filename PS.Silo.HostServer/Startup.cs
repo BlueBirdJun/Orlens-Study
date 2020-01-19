@@ -43,8 +43,7 @@ namespace PS.Silo.HostServer
         {
             Configuration = configuration;
             
-            Environment = environment;
-        
+            Environment = environment;        
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -125,7 +124,6 @@ namespace PS.Silo.HostServer
                 {
                     services.AddApplication();
                     services.AddApplicationCommand();
-
                     services.AddInfrastructure(Configuration, Environment);
                     services.AddScoped<ICurrentUserService, CurrentUserService>();
                     //services..AddFluentVa1lidation(fv => fv.RegisterValidatorsFromAssemblyContaining<IApplicationDbContext>());

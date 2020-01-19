@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using PS.Applications.Common.Interfaces;
 using PS.Infrasture.Identity;
 using PS.Infrasture.Persistence;
+using PS.Infrasture.Persistence2;
 using PS.Infrasture.Services;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,14 @@ namespace PS.Infrasture
                     b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
+
+            services.AddDbContext<MechantDbContext>(options =>
+                options.UseSqlServer(
+                    configuration.GetConnectionString("DefaultConnection2")));
+
+
+            services.AddScoped<IMechantDbContext>(provider => provider.GetService<MechantDbContext>());
+
 
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();

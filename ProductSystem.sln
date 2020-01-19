@@ -65,7 +65,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "clienttest", "clienttest\cl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mqtest", "mqtest\mqtest.csproj", "{C79FA759-211B-4EF1-9099-14032B1533F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eventstoretest", "eventstoretest\eventstoretest.csproj", "{C2278B43-A2A7-47E3-AA50-723B0AA9DCF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eventstoretest", "eventstoretest\eventstoretest.csproj", "{C2278B43-A2A7-47E3-AA50-723B0AA9DCF1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PS.Database", "PS.Database\PS.Database.csproj", "{3C32C6CF-ACBF-4D60-AEAC-A40E8662E528}"
 EndProject
@@ -75,7 +75,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "test2", "test2\test2.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ocatile.Grain.PS", "OCatle\Ocatile.Grain.PS\Ocatile.Grain.PS.csproj", "{AF9DE760-49FA-4073-8DF4-D78D76D1265B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tenten.Clinet.Api", "Tenten\Tenten.Clinet.Api\Tenten.Clinet.Api.csproj", "{90278947-8FDD-4FAA-B73D-B8DDBBEB15FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tenten.Clinet.Api", "Tenten\Tenten.Clinet.Api\Tenten.Clinet.Api.csproj", "{90278947-8FDD-4FAA-B73D-B8DDBBEB15FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hanfile_test", "hanfile_test\hanfile_test.csproj", "{AAC74452-0D7A-4135-8B3D-4AF439683868}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -159,6 +161,10 @@ Global
 		{90278947-8FDD-4FAA-B73D-B8DDBBEB15FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90278947-8FDD-4FAA-B73D-B8DDBBEB15FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90278947-8FDD-4FAA-B73D-B8DDBBEB15FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAC74452-0D7A-4135-8B3D-4AF439683868}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAC74452-0D7A-4135-8B3D-4AF439683868}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAC74452-0D7A-4135-8B3D-4AF439683868}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAC74452-0D7A-4135-8B3D-4AF439683868}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -194,6 +200,7 @@ Global
 		{38DA6B8A-1EE4-4906-9CBE-A4D66F37C0E1} = {95958187-EA12-4670-9A8B-EC4B5C496258}
 		{AF9DE760-49FA-4073-8DF4-D78D76D1265B} = {72CC5BFD-B934-4F60-9B1A-B3ADC53EF949}
 		{90278947-8FDD-4FAA-B73D-B8DDBBEB15FF} = {96F31FCA-4408-44BB-82C9-377D8FF78C5A}
+		{AAC74452-0D7A-4135-8B3D-4AF439683868} = {3E24AD0C-869A-46A0-A16A-A56CCCDAC76B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {36E10BD6-7AC5-4103-8D44-9A7053FAF9F6}
